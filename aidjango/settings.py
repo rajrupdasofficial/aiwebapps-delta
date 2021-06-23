@@ -87,12 +87,12 @@ WSGI_APPLICATION = 'aidjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME':'aiweb',
-        'USER':'root',
-        'PASSWORD':'',
+        'USER':'postgres',
+        'PASSWORD':'office',
         'HOST':'localhost',
-        'PORT':'3306',
+        'PORT':'5432',
     }
 }
 
