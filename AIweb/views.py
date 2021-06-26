@@ -14,6 +14,7 @@ class SalesListView(ListView):
     #qs=Sale.objects.all()
     template_name='Aiweb/main.html'
     #context_object_list="object_list"
+    
     #return render(request,'Aiweb/main.html, context={})
 
 class SaleDetailView(DetailView):
