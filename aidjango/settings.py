@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     
-    'AIweb.apps.AiwebConfig',
+    'AIweb',
     'customers.apps.CustomersConfig',
     'products.apps.ProductsConfig',
     'profiles.apps.ProfilesConfig',

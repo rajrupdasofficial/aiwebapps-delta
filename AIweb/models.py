@@ -33,11 +33,8 @@ class Sale(models.Model):
         return f"Sales for the amount ${self.total_price}"
 
     def get_absolute_url(self):
-        try:
-            pass
-        except Exception as e:
-            return reverse('Aiweb:detail', kwargs={'pk':self.pk})
-            print("**"*10, e)
+        return reverse('detail', kwargs={'pk':self.pk})
+            
 
 
     def save(self,*args, **kwargs):

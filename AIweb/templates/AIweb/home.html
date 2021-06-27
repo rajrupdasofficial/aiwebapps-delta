@@ -1,9 +1,14 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %}
 home
 {% endblock title %}
 
 {% block content %}
 {{message}}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-primary mt-4">Search</button>
+</form>
 {% endblock content %}
