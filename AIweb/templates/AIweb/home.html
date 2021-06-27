@@ -1,5 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
+
+{% block scripts %}
+    <script src="{% static 'AIweb/home.js' %}" defer></script>
+{% endblock scripts %}
+
 {% block title %}
 home
 {% endblock title %}
@@ -13,10 +19,24 @@ home
 </form>
 <br>
 {% if sales_df %}
+    Sales-Data_Frame
     {{sales_df|safe}}
     <br>
     <br>
+    Positions-Data_Frame
     {{positions_df|safe}}
+    <br>
+    <br>
+    Merged-Data_Frame
+    {{merged_df|safe}}
+    <br>
+    <br>
+    Grouped by Data_Frame
+    {{df|safe}}
+    <br>
+    <br>
+    Chart
+    <img src="data:image/png;base64,{{chart|safe}}">
 {% else %}
     <h4>Sorry! There is no Data available</h4>
 {% endif %}
