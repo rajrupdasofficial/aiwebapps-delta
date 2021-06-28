@@ -15,6 +15,7 @@ def home_view(request):
     merged_df=None
     df=None
     chart=None
+    no_data=None
     search_form=SalesSearchForm(request.POST or None)
     report_form=ReportForm()
     if request.method == 'POST':
@@ -52,7 +53,7 @@ def home_view(request):
             merged_df=merged_df.to_html()
             df=df.to_html()
         else:
-            print("There is no data")
+            no_data='Sorry  there no data available :('
 
 
 
@@ -64,6 +65,7 @@ def home_view(request):
         'df':df,
         'chart':chart,
         'report_form':report_form,
+        'no_data':no_data,
     }
     return render(request,'AIweb/home.html',context)
 
