@@ -3,9 +3,11 @@ from django.http import HttpResponse
 from django.views.generic import ListView,DetailView
 from .models import Sale
 from .forms import  SalesSearchForm
+from reports.forms import ReportForm
 import pandas as pd
 from .utils import *
 from pandas.core.frame import DataFrame
+
 # Create your views here.
 def home_view(request):
     sales_df=None
@@ -13,11 +15,13 @@ def home_view(request):
     merged_df=None
     df=None
     chart=None
-    form=SalesSearchForm(request.POST or None)
+    search_form=SalesSearchForm(request.POST or None)
+    report_form=ReportForm()
     if request.method == 'POST':
         date_from=request.POST.get('date_form')
         date_to=request.POST.get('date_to')
         chart_type=request.POST.get('chart_type')
+        results_by=request.POST.get('results_by')
         #print(date_from,date_to,chart_type)
         sale_qs=Sale.objects.filter(created__date__lte=date_to, created__date__gte=date_from)
         if len(sale_qs)>0:
@@ -42,8 +46,7 @@ def home_view(request):
             positions_df=pd.DataFrame(positions_data)
             merged_df=pd.merge(sales_df,positions_df,on='sales_id')    
             df=merged_df.groupby('transaction_id',as_index=False)['price'].agg('sum') 
-            chart=get_chart(chart_type,df,labels=df['transaction_id'].values)
-            print('chart',chart)
+            chart=get_chart(chart_type,sales_df,results_by)
             sales_df=sales_df.to_html()            
             positions_df=positions_df.to_html() 
             merged_df=merged_df.to_html()
@@ -54,12 +57,13 @@ def home_view(request):
 
 
     context={
-        'form':form,
+        'search_form':search_form,
         'sales_df':sales_df,
         'positions_df':positions_df,
         'merged_df':merged_df,
         'df':df,
         'chart':chart,
+        'report_form':report_form,
     }
     return render(request,'AIweb/home.html',context)
 
