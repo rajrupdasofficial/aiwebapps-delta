@@ -14,5 +14,5 @@ urlpatterns=[
     
     path('<pk>/',ReportDetailView.as_view(),name='detail'),
     
-    path('/<pk>/pdf/',render_pdf_view,name='pdf'),
+    path('<pk>/pdf/',render_pdf_view,name='pdf'),
 ]

@@ -1,8 +1,8 @@
-const csrf=getElementsByName('csrfmiddlewaretoken')[0].Value
+const csrf=document.getElementsByName('csrfmiddlewaretoken')[0].Value
 
 Dropzone.autoDiscover=false
 
-const myDropzone = new Dropzone ('#my-dropozone',{
+const myDropzone = new Dropzone ('#my-dropzone',{
     url:'/reports/upload/',
     init:function(){
         this.on('sending',function(file,xhr,formData){

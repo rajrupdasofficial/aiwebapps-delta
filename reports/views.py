@@ -24,7 +24,8 @@ class UploadTemplateView(TemplateView):
     template_name='reports/from_file.html'
 
 def csv_upload_view(request):
-    print('file is being sent')
+    print('file is sending')
+    return HttpResponse()
 
     if request.method=='POST':
         csv_file=request.FILES.get('file')
