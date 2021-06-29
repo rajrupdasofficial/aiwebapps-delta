@@ -24,7 +24,7 @@ class Position(models.Model):
         return f"id: {self.id}, product: {self.product.name}, quantity: {self.quantity}"
 
 class Sale(models.Model):
-    transaction_id= models.CharField(max_length=12,blank= True)
+    transaction_id= models.CharField(max_length=50000,blank= True)
     positions=models.ManyToManyField(Position)
     total_price=models.FloatField(blank=True, null=True)
     customer= models.ForeignKey(Customer, on_delete=models.CASCADE)
