@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from profiles.models import Profile
 from django.http import HttpResponse, JsonResponse
-from . forms import ReportForm
+from .forms import ReportForm
 from .utils import get_report_image
 from .models import Report
 from django.views.generic import ListView , DetailView,TemplateView
@@ -57,7 +57,9 @@ def csv_upload_view(request):
                         sale_obj, _ =Sale.objects.get_or_create(transaction_id=transaction_id,customer=customer_obj,salesman=salesman_obj,created=date)
                         sale_obj.positions.add(position_obj)
                         sale_obj.save()           
-
+                return JsonResponse({'ex':False})
+        else:         
+            return JsonResponse({'ex':True})        
     return HttpResponse()
 
     if request.method=='POST':
