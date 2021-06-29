@@ -10,3 +10,9 @@
 .dz:hover{
     background-color: aquamarine;
 }
+
+.avatar-big{
+    height: 200px;
+    width: 200 px;
+    border-radius: 50%;
+}

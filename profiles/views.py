@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-from .forms import *
+from .forms import ProfileForm
 # Create your views here.
 
 def my_profile_view(request):
