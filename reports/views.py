@@ -50,13 +50,10 @@ def csv_upload_view(request):
                     customer_obj, _ = Customer.objects.get_or_create(name=customer)
                     salesman_obj=Profile.objects.get(user=request.user)
                     position_obj=Position.objects.create(product=product_obj,quantity=quantity,created=date)
-
-
                     sale_obj, _ =Sale.objects.get_or_create(transaction_id=transaction_id,customer=customer_obj,salesman=salesman_obj,created=date)
                     sale_obj.positions.add(position_obj)
-                    sale_obj.save()
-             
-                
+                    sale_obj.save()           
+
     return HttpResponse()
 
     if request.method=='POST':
