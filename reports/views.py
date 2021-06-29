@@ -10,6 +10,8 @@ from xhtml2pdf import pisa
 from AIweb.models import Sale,Position,CSV
 import csv
 from django.utils.dateparse import parse_date
+from AIweb.models import Sale,Position,CSV
+from django.utils.dateparse import parse_date
 # Create your views here.
 
 class ReportListView(ListView):
@@ -25,6 +27,25 @@ class UploadTemplateView(TemplateView):
 
 def csv_upload_view(request):
     print('file is sending')
+
+    if request.method=='POST':
+        csv_file=request.FILES.get('file')
+        obj=CSV.objects.create(file_name=csv_file)
+
+        with open(obj.file_name.path, 'r') as f:
+            reader=csv.reader(f)
+            reader.__next__()
+            for row in reader:
+                data="".join(row)
+                data=data.split(';')
+                transaction_id=data[1]
+                product=data[2]
+                quantity=int(data[3])
+                customer=data[5]
+                date=parse_date(data[6])
+                #data.pop()
+                #print(data)
+                
     return HttpResponse()
 
     if request.method=='POST':
